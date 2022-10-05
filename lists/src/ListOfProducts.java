@@ -16,8 +16,10 @@ public class ListOfProducts {
 
         Collections.sort(products);
 
-        for(int i = 0; i < products.toArray().length; i++) {
-            System.out.printf("%d. %s%n", i + 1, products.get(i));
+        int currentNumber = 1;
+        for(String product : products) {
+            System.out.printf("%d. %s%n", currentNumber, product);
+            currentNumber++;
         }
     }
 }
