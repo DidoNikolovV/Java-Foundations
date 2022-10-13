@@ -7,9 +7,9 @@ public class CountRealNumbers {
         Scanner scanner = new Scanner(System.in);
 
         String[] items = scanner.nextLine().split(" ");
-        Map<Integer, Integer> numberOccurrences = new TreeMap<>();
+        Map<Double, Integer> numberOccurrences = new TreeMap<>();
         for(String item: items) {
-            int number = Integer.parseInt(item);
+            double number = Integer.parseInt(item);
 
             Integer occurrences = numberOccurrences.get(number);
 
@@ -20,7 +20,7 @@ public class CountRealNumbers {
             }
         }
 
-        for(Map.Entry<Integer, Integer> entry : numberOccurrences.entrySet()) {
+        for(Map.Entry<Double, Integer> entry : numberOccurrences.entrySet()) {
             System.out.printf("%d -> %d%n", entry.getKey(), entry.getValue());
         }
 
