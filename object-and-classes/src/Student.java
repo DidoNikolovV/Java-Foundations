@@ -53,16 +53,33 @@ public class Student {
             int age = Integer.parseInt(input[2]);
             String hometown = input[3];
 
-            Student student = new Student();
-            student.setFirstName(firstName);
-            student.setLastName(lastName);
-            student.setAge(age);
-            student.setHomeTown(hometown);
 
-            students.add(student);
+
+            Student stud = students.stream()
+                            .filter(s -> s.getFirstName().equals(firstName) && s.getLastName().equals(lastName))
+                                    .findFirst()
+                                            .orElse(null);
+
+            if(stud == null) {
+                Student student = new Student();
+                student.setFirstName(firstName);
+                student.setLastName(lastName);
+                student.setAge(age);
+                student.setHomeTown(hometown);
+                students.add(student);
+            } else {
+                stud.setFirstName(firstName);
+                stud.setLastName(lastName);
+                stud.setAge(age);
+                stud.setHomeTown(hometown);
+            }
+
+
+
 
             input = scanner.nextLine().split(" ");
         }
+
 
         String city = scanner.nextLine();
         for(Student student : students) {
