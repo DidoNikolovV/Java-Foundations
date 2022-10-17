@@ -5,6 +5,21 @@ public class Car {
     String model;
     int horsePower;
 
+    public Car(String brand) {
+        this.brand = brand;
+    }
+
+    public Car(String brand, String model) {
+        this.brand = brand;
+        this.model = model;
+    }
+
+    public Car(String brand, String model, int horsePower) {
+        this.brand = brand;
+        this.model = model;
+        this.horsePower = horsePower;
+    }
+
     public String getBrand() {
         return brand;
     }
@@ -35,16 +50,21 @@ public class Car {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        Car car = new Car();
+        var car = new Car("Toyota", "Yaris", 110);
+        System.out.println(car);
+
+        Scanner scanner = new Scanner(System.in);
 
         String brand = scanner.nextLine();
         String model = scanner.nextLine();
         int horsePower = scanner.nextInt();
-        car.setBrand(brand);
-        car.setModel(model);
-        car.setHorsePower(horsePower);
+
+//        Car car1 = new Car(brand);
+//        Car car2 = new Car(brand, model);
+//        car.setBrand(brand);
+//        car.setModel(model);
+//        car.setHorsePower(horsePower);
 
         System.out.println(car.toString());
 
