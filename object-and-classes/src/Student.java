@@ -1,91 +1,49 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class Student {
-    String firstName;
-    String lastName;
-    int age;
-    String homeTown;
+    private String firstName;
+    private String lastName;
+    private double grade;
 
-    public void setFirstName(String firstName) {
+    public Student(String firstName, String lastName, double grade) {
         this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
+        this.grade = grade;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public double getGrade() {
+        return grade;
     }
 
-    public void setHomeTown(String homeTown) {
-        this.homeTown = homeTown;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getHomeTown() {
-        return homeTown;
+    @Override
+    public String toString(){
+        return String.format("%s %s: %.2f", this.firstName, this.lastName, this.grade);
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] input = scanner.nextLine().split(" ");
+        int n = Integer.parseInt(scanner.nextLine());
 
         List<Student> students = new ArrayList<>();
 
-        while(!input[0].equals("end")) {
-            String firstName = input[0];
-            String lastName = input[1];
-            int age = Integer.parseInt(input[2]);
-            String hometown = input[3];
+        for(int i = 0; i < n; i++) {
+            String[] studentInfo = scanner.nextLine().split(" ");
+            String firstName = studentInfo[0];
+            String lastName = studentInfo[1];
+            double studentGrade = Double.parseDouble(studentInfo[2]);
 
-
-
-            Student stud = students.stream()
-                            .filter(s -> s.getFirstName().equals(firstName) && s.getLastName().equals(lastName))
-                                    .findFirst()
-                                            .orElse(null);
-
-            if(stud == null) {
-                Student student = new Student();
-                student.setFirstName(firstName);
-                student.setLastName(lastName);
-                student.setAge(age);
-                student.setHomeTown(hometown);
-                students.add(student);
-            } else {
-                stud.setFirstName(firstName);
-                stud.setLastName(lastName);
-                stud.setAge(age);
-                stud.setHomeTown(hometown);
-            }
-
-
-
-
-            input = scanner.nextLine().split(" ");
+            Student stud = new Student(firstName, lastName, studentGrade);
+            students.add(stud);
         }
 
+        students.sort((a, b) -> Double.compare(b.grade, a.grade));
 
-        String city = scanner.nextLine();
-        for(Student student : students) {
-            if(student.getHomeTown().equals(city)) {
-                System.out.printf("%s %s is %d years old%n", student.getFirstName(), student.getLastName(), student.getAge());
-            }
+        for(Student stud: students) {
+            System.out.println(stud.toString());
         }
     }
 }
