@@ -32,7 +32,22 @@ public class Car {
     }
 
     public static void main(String[] args) {
-        Car c = new Car("Toyota", "Yaris", 110);
-        System.out.println(c);
+        // Read the input
+        Scanner scanner = new Scanner(System.in);
+        String brand = scanner.nextLine();
+        String model = scanner.nextLine();
+        String hp = scanner.nextLine();
+
+        // Create a Car object
+        Car car;
+        if(hp.equals("")) {
+            car = new Car(brand, model);
+        } else {
+            int horsePower = Integer.parseInt(hp);
+            car = new Car(brand, model, horsePower);
+        }
+
+        // Print thhe Car object
+        System.out.println(car);
     }
 }
