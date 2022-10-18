@@ -1,11 +1,13 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
-public class Card implements Comparable<Card> {
+class Card implements Comparable<Card> {
     private String face;
     private char suit;
 
     private static String[] ALL_FACES = new String[] {
-        "2", "3", "4", "5", "6", "7", "8","9","10","J","Q","K","A"
+            "2", "3", "4", "5", "6", "7", "8","9","10","J","Q","K","A"
     };
 
     private static String ALL_SUITS = "♠♥♦♣";
@@ -64,5 +66,32 @@ public class Card implements Comparable<Card> {
             }
         }
         return -1;
+    }
+}
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] inputCards =  scanner.nextLine().split(" ");
+
+        var cards = new ArrayList<Card>();
+        for(var cardText: inputCards) {
+            char suit= cardText.charAt(cardText.length() - 1);
+            String face = cardText.substring(0, cardText.length() - 1);
+            Card card = new Card(face, suit);
+            cards.add(card);
+        }
+
+        cards.sort((c1, c2) -> c1.compareTo(c2));
+
+        String result = cards.toString();
+        result = result.replace(" ", "");
+        result = result.replace("[", "");
+        result = result.replace("]", "");
+        result = result.replace(",", " ");
+        System.out.println(result);
+
     }
 }
