@@ -1,23 +1,50 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class Person {
     private String name;
+    private String id;
     private int age;
 
-    public Person(String name, int age) {
+    public Person(String name, String id, int age) {
         this.name = name;
+        this.id = id;
         this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getAge() {
         return age;
     }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     @Override
     public String toString() {
-        return this.name + " - " + this.age;
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", age=" + age +
+                '}';
     }
 
     public static void main(String[] args) {
@@ -25,21 +52,27 @@ public class Person {
 
         List<Person> people = new ArrayList<>();
 
-        int n = Integer.parseInt(scanner.nextLine());
-        for(int i = 0; i < n; i++) {
-            String[] inputParts = scanner.nextLine().split(" ");
-            String name = inputParts[0];
-            int age = Integer.parseInt(inputParts[1]);
+        while(true) {
+            String command = scanner.nextLine();
+            if(command.equals("End")) {
+                break;
+            }
 
-            Person person = new Person(name, age);
-            people.add(person);
-
+            String[] cmdParts = command.split(" ");
+            String name = cmdParts[0];
+            String id = cmdParts[1];
+            int age = Integer.parseInt(cmdParts[2]);
+            Person p = new Person(name, id, age);
+            people.add(p);
         }
 
-        for(Person person : people) {
-            if(person.getAge() > 30) {
-                System.out.println(person.toString());
-            }
+        people.sort((p1, p2) -> Double.compare(p1.getAge(), p2.getAge()));
+        for(Person p : people) {
+            System.out.printf("%s with ID: %s is %d years old.%n",
+                    p.getName(),
+                    p.getId(),
+                    p.getAge()
+            );
         }
     }
 }
