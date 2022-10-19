@@ -4,7 +4,7 @@ public class SqrtExample {
     public static double calcSqrt(double value) {
         if (value < 0) {
             throw new ArithmeticException(
-                    "Sqrt for a negative numbers is undefined!"
+                    "Sqrt for a negative nums.txt is undefined!"
             );
         }
         return Math.sqrt(value);
